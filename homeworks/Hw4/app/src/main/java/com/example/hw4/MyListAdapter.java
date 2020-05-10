@@ -28,7 +28,7 @@ class MyListAdapter extends ArrayAdapter<SubjectData>{
             TextView subtitle = convertView.findViewById(R.id.subtitle);
             ImageView image = convertView.findViewById(R.id.image);
             title.setText(subjectData.name);
-            subtitle.setText(subjectData.birthday);
+            subtitle.setText(subjectData.birthday + " " + subjectData.constellation);
             image.setImageResource(subjectData.image);
        }
         return convertView;

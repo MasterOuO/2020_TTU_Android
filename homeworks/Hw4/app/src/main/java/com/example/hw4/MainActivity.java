@@ -22,7 +22,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
     private EditText editDate, name;
     private TextView birthdayText, constellationText;
-    private int year, month, day;
+    private int monthSave, daySave;
     private Intent intent;
     private ArrayList<SubjectData> arrayList;
     @Override
@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     else {
                         birthdayText.setText("生日: " + editDate.getText());
                         constellationText.setText("星座: ");
-                        switch(month){
+                        switch(monthSave){
                             case 1:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[0]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[0], R.drawable.capricorn));
                                 }
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 2:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[1]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[1], R.drawable.aquarius));
                                 }
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 3:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[2]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[2], R.drawable.pisces));
                                 }
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 4:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[3]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[3], R.drawable.aries));
                                 }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 5:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[4]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[4], R.drawable.taurus));
                                 }
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 6:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[5]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[5], R.drawable.gemini));
                                 }
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 7:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[6]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[6], R.drawable.cancer));
                                 }
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 8:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[7]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[7], R.drawable.leo));
                                 }
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 9:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[8]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[8], R.drawable.virgo));
                                 }
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 10:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[9]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[9], R.drawable.libra));
                                 }
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 11:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[10]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[10], R.drawable.scorpio));
                                 }
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 12:
-                                if(day < 21){
+                                if(daySave < 21){
                                     constellationText.append(TC[11]);
                                     arrayList.add(new SubjectData(name.getText().toString(), editDate.getText().toString(), TC[11], R.drawable.sagittarius));
                                 }
@@ -208,14 +208,16 @@ public class MainActivity extends AppCompatActivity {
     }
     public void datePicker(View v){
         Calendar calendar = Calendar.getInstance();
-        // 這邊要先get一次，不然會從1990開始，我不知道為什麼，請自己找。
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+        // 這邊要先get一次，不然會從1990開始，我不知道為什麼。
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
         new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 // Calendar裡的月份從0開始，很鳥，所以要+1
-                String dateTime = String.valueOf(year) + "-" + String.valueOf(month+1) + "-"+String.valueOf(day);
+                monthSave = month+1;
+                daySave = day;
+                String dateTime = String.valueOf(year) + "-" + String.valueOf(month+1) + "-" + String.valueOf(day);
                 editDate.setText(dateTime);
             }
         }, year, month, day).show();
