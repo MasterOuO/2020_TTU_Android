@@ -26,5 +26,4 @@ File file = new File(getExternalFilesDir(null), "XXX.xxx");
 // getExternalFilesDir(null) = /storage/emulated/0/Android/data/{your.package.name}/files
 it.setDataAndType(FileProvider.getUriForFile(this, getPackageName() + ".provider", file), "xxx/*");
 it.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-break;
 ```
