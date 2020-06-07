@@ -10,7 +10,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     final static String ADDRESS_FIELD = "ADDRESS";
     final static String IMAGE_FIELD = "IMAGE";
 
-    public DBOpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public DBOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
